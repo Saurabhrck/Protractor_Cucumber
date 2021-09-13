@@ -46,16 +46,15 @@ export let config: Config = {
           "Test Environment": "STAGING",
           Browser: "Chrome",
           Platform: "Windows 10",
-          Parallel: "none",
-          Executed: "Local",
+          Parallel: "Features",
+          Executed: "Grid",
         },
       };
 
       reporter.generate(options);
     } catch (error) {
       if (
-        !(error instanceof SyntaxError) ||
-        !error.message.endsWith("Unexpected end of JSON input")
+        !(error as SyntaxError).message.endsWith("Unexpected end of JSON input")
       ) {
         throw error;
       }
