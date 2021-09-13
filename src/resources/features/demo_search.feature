@@ -1,15 +1,8 @@
 @whole
-Feature: Validate Angular Home page
+Feature: Validate Angular Search page
 
-    Feature to test angular home and search
-
-    @Guide
-    Scenario: Navigate to Guide page
-        Given I open angular homepage
-        When I navigate to documents
-        And I click on first page
-        Then I land on first page
-
+    Feature to test angular search
+    # These will fail and hence retry
     @Search
     Scenario Outline: Search for a <Search_Text>
         Given I open angular homepage

@@ -1,4 +1,4 @@
-import { browser, Config } from "protractor";
+import { browser, Config, element } from "protractor";
 import reporter from "cucumber-html-reporter";
 
 export let config: Config = {
@@ -8,6 +8,8 @@ export let config: Config = {
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
     browserName: "chrome",
+    shardTestFiles: true,
+    maxInstances: 2,
   },
 
   // Framework to use. Jasmine is recommended.
@@ -20,42 +22,44 @@ export let config: Config = {
 
   // cucumber command line options
   cucumberOpts: {
-    require: ["../dist/stepDefs/*.js"], // require step definition files before executing features
-    tags: "@whole", // <string[]> (expression) only execute the features or scenarios with tags matching the expression
-    // strict: true, // <boolean> fail if there are any undefined or pending steps
-    format: ["json:../reports/report.json"], // <string[]> (type[:path]) specify the output format, optionally supply PATH to redirect formatter output (repeatable)
-    // "dry-run": true, // <boolean> invoke formatters without executing steps
-    // compiler: [], // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
+    require: ["../dist/stepDefs/*.js"],
+    tags: "@whole",
+    format: "json:../reports/report.json",
+    retry: 1,
   },
-
-  // // Options to be passed to Jasmine.
-  // jasmineNodeOpts: {
-  //   defaultTimeoutInterval: 30000,
-  // },
 
   onPrepare: function () {
     browser.driver.manage().window().maximize();
   },
 
   onComplete: function () {
-    const options: reporter.Options = {
-      theme: "bootstrap",
-      jsonDir: "./reports/",
-      output: "./reports/cucumber_report.html",
-      reportSuiteAsScenarios: true,
-      scenarioTimestamp: true,
-      launchReport: false,
-      metadata: {
-        "App Version": "0.3.2",
-        "Test Environment": "STAGING",
-        Browser: "Chrome",
-        Platform: "Windows 10",
-        Parallel: "none",
-        Executed: "Local",
-      },
-    };
+    try {
+      const options: reporter.Options = {
+        theme: "bootstrap",
+        jsonDir: "./reports/",
+        output: "./reports/cucumber_report.html",
+        reportSuiteAsScenarios: true,
+        scenarioTimestamp: true,
+        launchReport: false,
+        metadata: {
+          "App Version": "0.3.2",
+          "Test Environment": "STAGING",
+          Browser: "Chrome",
+          Platform: "Windows 10",
+          Parallel: "none",
+          Executed: "Local",
+        },
+      };
 
-    reporter.generate(options);
+      reporter.generate(options);
+    } catch (error) {
+      if (
+        !(error instanceof SyntaxError) ||
+        !error.message.endsWith("Unexpected end of JSON input")
+      ) {
+        throw error;
+      }
+    }
   },
 
   SELENIUM_PROMISE_MANAGER: false,
