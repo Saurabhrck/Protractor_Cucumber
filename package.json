@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "clean-dist": "IF EXIST dist RMDIR /S /Q dist",
-    "clean-report": "IF EXIST reports RMDIR /S /Q reports && mkdir reports",
-    "clean": "npm run clean-dist && npm run clean-report ",
+    "clean-report": "IF EXIST reports RMDIR /S /Q reports",
+    "clean": "npm run clean-dist && npm run clean-report && mkdir reports",
     "copy-files": "./node_modules/.bin/copyfiles -u 1 src/resources/features/*.feature dist",
     "pretest": "npm run clean && tsc && npm run copy-files",
     "protractor": "./node_modules/protractor/built/cli.js",

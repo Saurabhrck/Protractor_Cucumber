@@ -1,6 +1,5 @@
 import { browser, Config } from "protractor";
 import reporter from "cucumber-html-reporter";
-var HtmlReporter = require("protractor-beautiful-reporter");
 
 export let config: Config = {
   directConnect: false,

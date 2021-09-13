@@ -15,7 +15,6 @@ Before({ tags: "@Guide" }, function () {
 
 After("@whole", (result) => {
   console.log("Test Done");
-  console.log(result.result?.status);
 });
 
 After(async function (scenario) {
