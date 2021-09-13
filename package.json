@@ -1,0 +1,38 @@
+{
+  "name": "Protractor_Cucumber",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean-dist": "IF EXIST dist RMDIR /S /Q dist",
+    "clean-report": "IF EXIST reports RMDIR /S /Q reports && mkdir reports",
+    "clean": "npm run clean-dist && npm run clean-report ",
+    "copy-files": "./node_modules/.bin/copyfiles -u 1 src/resources/features/*.feature dist",
+    "pretest": "npm run clean && tsc && npm run copy-files",
+    "protractor": "./node_modules/protractor/built/cli.js",
+    "webdriver-update": "./node_modules/.bin/webdriver-manager update",
+    "webdriver-start": "./node_modules/.bin/webdriver-manager start",
+    "test": "protractor dist/conf.js"
+  },
+  "keywords": [],
+  "author": "Saurabh Ghosh",
+  "license": "ISC",
+  "dependencies": {
+    "@cucumber/cucumber": "^7.3.1",
+    "@types/jasmine": "^3.9.0",
+    "@types/jasminewd2": "^2.0.10",
+    "@types/node": "^16.9.1",
+    "jasmine": "^3.9.0",
+    "protractor": "^7.0.0",
+    "protractor-cucumber-framework": "^8.2.5",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.21",
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
+    "copyfiles": "^2.4.1",
+    "cucumber-html-reporter": "^5.5.0"
+  }
+}
