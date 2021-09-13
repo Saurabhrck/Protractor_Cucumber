@@ -2,6 +2,10 @@
 
 Demo Framework with Protractor and Cucumber
 
+Install npm packages:
+
+> npm i
+
 Update and init WebDriver:
 
 > npm run webdriver-update
