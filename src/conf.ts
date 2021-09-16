@@ -9,7 +9,7 @@ export let config: Config = {
   capabilities: {
     browserName: "chrome",
     shardTestFiles: true,
-    maxInstances: 2,
+    maxInstances: 3,
   },
 
   // Framework to use. Jasmine is recommended.
