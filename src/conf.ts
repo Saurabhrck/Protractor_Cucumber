@@ -25,7 +25,7 @@ export let config: Config = {
     require: ["../dist/stepDefs/*.js"],
     tags: "@whole",
     format: "json:../reports/report.json",
-    retry: 1,
+    retry: 2,
   },
 
   onPrepare: function () {
