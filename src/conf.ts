@@ -1,8 +1,8 @@
-import { browser, Config, element } from "protractor";
+import { browser, Config } from "protractor";
 import reporter from "cucumber-html-reporter";
 
 export let config: Config = {
-  directConnect: true,
+  directConnect: false,
   seleniumAddress: "http://localhost:4444/wd/hub",
 
   // Capabilities to be passed to the webdriver instance.
@@ -23,9 +23,9 @@ export let config: Config = {
   // cucumber command line options
   cucumberOpts: {
     require: ["../dist/stepDefs/*.js"],
-    tags: "@whole",
+    tags: "@Order",
     format: "json:../reports/report.json",
-    retry: 2,
+    retry: 0,
   },
 
   onPrepare: function () {
@@ -41,6 +41,7 @@ export let config: Config = {
         reportSuiteAsScenarios: true,
         scenarioTimestamp: true,
         launchReport: false,
+        ignoreBadJsonFile: true,
         metadata: {
           "App Version": "0.3.2",
           "Test Environment": "STAGING",
