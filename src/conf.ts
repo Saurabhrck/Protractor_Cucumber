@@ -2,14 +2,14 @@ import { browser, Config } from "protractor";
 import reporter from "cucumber-html-reporter";
 
 export let config: Config = {
-  directConnect: false,
+  directConnect: true,
   seleniumAddress: "http://localhost:4444/wd/hub",
 
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
     browserName: "chrome",
     shardTestFiles: true,
-    maxInstances: 3,
+    maxInstances: 1,
   },
 
   // Framework to use. Jasmine is recommended.
